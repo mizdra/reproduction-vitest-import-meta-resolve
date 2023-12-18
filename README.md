@@ -5,6 +5,10 @@
 ```console
 $ npm i
 
+$ cat src/index.js
+const path = import.meta.resolve('vitest');
+console.log(path);
+
 $ node src/index.js
 file:///Users/mizdra/src/github.com/mizdra/reproduction-vitest-import-meta-resolve/node_modules/vitest/dist/index.js
 
