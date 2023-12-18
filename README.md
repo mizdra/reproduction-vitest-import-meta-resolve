@@ -1,32 +1,40 @@
-# npm-package-template
+# reproduction-vitest-import-meta-resolve
 
-npm package を作るための @mizdra 専用プロジェクトテンプレート。
+## How to reproduce
 
-## 技術スタック
+```console
+$ npm i
 
-- npm
-- TypeScript
-- ESM
-- Prettier
-- ESLint
-- Vitest
-- renovate
-- GitHub Actions
-- vscode 向けの各種設定ファイル (`extensions.json`, `launch.json`, `settings.json`)
+$ node src/index.js
+file:///Users/mizdra/src/github.com/mizdra/reproduction-vitest-import-meta-resolve/node_modules/vitest/dist/index.js
 
-## Usage
+$ npm run test -- --run
 
-```bash
-cd app_name
-wget -O - https://github.com/mizdra/npm-package-template/archive/main.tar.gz | tar xzvf - --strip=1
-grep -l 'CC0-1.0' | xargs sed -i '' -e 's/CC0-1.0/MIT/g'
-license mit > LICENSE
+> app_name@0.0.0 test
+> vitest --run
 
-## Init project
-npm install
-npm run dev
+
+ RUN  v1.0.4 /Users/mizdra/src/github.com/mizdra/reproduction-vitest-import-meta-resolve
+
+ ❯ src/index.test.js (1)
+   × import.meta.resolve
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/index.test.js > import.meta.resolve
+TypeError: __vite_ssr_import_meta__.resolve is not a function
+ ❯ src/index.test.js:4:28
+      2|
+      3| test('import.meta.resolve', () => {
+      4|   const path = import.meta.resolve('vitest');
+       |                            ^
+      5|   expect(path).toBe(expect.stringContaining('vitest'));
+      6| });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  01:18:01
+   Duration  155ms (transform 11ms, setup 0ms, collect 5ms, tests 3ms, environment 0ms, prepare 44ms)
 ```
-
-## License
-
-CC0-1.0
